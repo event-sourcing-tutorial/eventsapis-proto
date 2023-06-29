@@ -1,24 +1,27 @@
 {
   "name": "@event-sourcing-tutorial/eventsapis-proto",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "build/index.js",
   "repository": "git@github.com:event-sourcing-tutorial/eventsapis-proto.git",
   "author": "Abdulaziz Ghuloum <aghuloum@gmail.com>",
   "license": "MIT",
+  "private": false,
   "files": [
     "./src-ts",
     "./build"
   ],
   "dependencies": {
-    "protobufjs": "^7.1.2"
+    "@improbable-eng/grpc-web": "^0.15.0",
+    "protobufjs": "^7.1.2",
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
-    "ts-proto": "^1.150.1",
     "@grpc/grpc-js": "^1.8.5",
+    "ts-proto": "^1.150.1",
     "typescript": "^4.9.3"
   },
   "scripts": {
-    "protoc": "rm -rf ./src-ts/proto ./src-ts/google && protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=oneof=unions --ts_proto_opt=stringEnums=true --ts_proto_opt=outputClientImpl=true --ts_proto_opt=forceLong=bigint --ts_proto_opt=esModuleInterop=true --ts_proto_opt=outputJsonMethods=false --ts_proto_opt=outputPartialMethods=false --ts_proto_opt=outputServices=grpc-js --ts_proto_out=./src-ts ./proto/*",
+    "protoc": "rm -rf ./src-ts/proto ./src-ts/google && protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=oneof=unions --ts_proto_opt=stringEnums=true --ts_proto_opt=outputClientImpl=grpc-web --ts_proto_opt=forceLong=bigint --ts_proto_opt=esModuleInterop=true --ts_proto_opt=outputJsonMethods=false --ts_proto_opt=outputPartialMethods=true --ts_proto_out=./src-ts ./proto/*",
     "watch": "tsc -w",
     "build": "tsc",
     "prepack": "yarn protoc && yarn tsc",
