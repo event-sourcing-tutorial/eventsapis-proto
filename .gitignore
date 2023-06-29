@@ -1,2 +1,6 @@
 /target
 /Cargo.lock
+/node_modules
+/src-ts/proto
+/src-ts/google
+/build
