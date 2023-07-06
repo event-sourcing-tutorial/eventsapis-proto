@@ -8,6 +8,10 @@ service EventsApis {
     rpc InsertEvent (InsertEventRequest) returns (InsertEventResponse);
     rpc GetEvent (GetEventRequest) returns (GetEventResponse);
     rpc PollEvents (PollEventsRequest) returns (stream PollEventsResponse);
+
+    rpc IssueCommand (IssueCommandRequest) returns (IssueCommandResponse);
+    rpc GetCommand (GetCommandRequest) returns (GetCommandResponse);
+    rpc PollCommands (PollCommandsRequest) returns (stream PollCommandsResponse);
 }
 
 message GetLastIdxRequest {
@@ -44,4 +48,47 @@ message PollEventsResponse {
   int64 idx = 1;
   google.protobuf.Timestamp inserted = 2;
   google.protobuf.Value payload = 3;
+}
+
+message IssueCommandRequest {
+  string command_id = 1;
+  string command_type = 2;
+  google.protobuf.Value command_data = 3;
+}
+
+message IssueCommandResponse {
+  bool success = 1;
+}
+
+message GetCommandRequest {
+  string command_id = 1;
+}
+
+enum final_status {
+  SUCCEEDED = 0;
+  FAILED = 1;
+  ABORTED = 2;
+}
+
+message GetCommandResponse {
+  optional string command_type = 1;
+  google.protobuf.Value command_data = 2;
+  google.protobuf.Timestamp inserted = 3;
+  final_status status = 4;
+}
+
+message PollCommandsRequest {
+  int64 last_idx = 1;
+}
+
+enum command_status {
+  ISSUED = 0;
+  FINALIZED = 1;
+}
+
+message PollCommandsResponse {
+  int64 idx = 1;
+  string command_id = 2;
+  command_status status = 3;
+  google.protobuf.Timestamp updated = 4;
 }
