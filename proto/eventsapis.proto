@@ -57,7 +57,7 @@ message IssueCommandRequest {
 }
 
 message IssueCommandResponse {
-  bool success = 1;
+  bool already_exists = 1;
 }
 
 message GetCommandRequest {
