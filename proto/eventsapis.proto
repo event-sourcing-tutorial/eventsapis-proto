@@ -4,21 +4,22 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
 service EventsApis {
-    rpc GetLastIdx (GetLastIdxRequest) returns (GetLastIdxResponse);
+    rpc GetEventLastIdx (GetEventLastIdxRequest) returns (GetEventLastIdxResponse);
     rpc InsertEvent (InsertEventRequest) returns (InsertEventResponse);
     rpc GetEvent (GetEventRequest) returns (GetEventResponse);
     rpc PollEvents (PollEventsRequest) returns (stream PollEventsResponse);
 
     rpc IssueCommand (IssueCommandRequest) returns (IssueCommandResponse);
     rpc GetCommand (GetCommandRequest) returns (GetCommandResponse);
+    rpc GetQueueLastIdx (GetQueueLastIdxRequest) returns (GetQueueLastIdxResponse);
     rpc GetQueue (GetQueueRequest) returns (GetQueueResponse);
     rpc PollCommands (PollCommandsRequest) returns (stream PollCommandsResponse);
 }
 
-message GetLastIdxRequest {
+message GetEventLastIdxRequest {
 }
 
-message GetLastIdxResponse {
+message GetEventLastIdxResponse {
   int64 last_idx = 1;
 }
 
@@ -76,6 +77,13 @@ message GetCommandResponse {
   google.protobuf.Value command_data = 2;
   google.protobuf.Timestamp inserted = 3;
   final_status status = 4;
+}
+
+message GetQueueLastIdxRequest {
+}
+
+message GetQueueLastIdxResponse {
+  int64 last_idx = 1;
 }
 
 message PollCommandsRequest {
