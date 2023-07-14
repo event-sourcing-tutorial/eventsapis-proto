@@ -76,7 +76,7 @@ message GetCommandResponse {
   optional string command_type = 1;
   google.protobuf.Value command_data = 2;
   google.protobuf.Timestamp inserted = 3;
-  final_status status = 4;
+  optional final_status status = 4;
 }
 
 message GetQueueLastIdxRequest {
