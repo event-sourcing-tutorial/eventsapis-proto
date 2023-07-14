@@ -1,6 +1,6 @@
 {
   "name": "@event-sourcing-tutorial/eventsapis-proto",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "main": "build/index.js",
   "repository": "git@github.com:event-sourcing-tutorial/eventsapis-proto.git",
   "author": "Abdulaziz Ghuloum <aghuloum@gmail.com>",
